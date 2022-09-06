@@ -22,3 +22,8 @@ main{
     cursor: pointer;
     height: 50px;
 }
+
+.form--image{
+    height: 100%;
+    margin-top: 30px
+}
