@@ -24,7 +24,7 @@ main{
 }
 
 .meme{
- 
+ position: relative;
 }
 .form--image{
     max-width: 100%;
@@ -61,9 +61,9 @@ main{
 }
 
 .bottom {
-    bottom: 30px;
+    bottom: 0px;
 }
 
 .top {
-    top: 250px;
+    top: 0px;
 }

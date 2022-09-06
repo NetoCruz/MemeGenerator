@@ -9,20 +9,39 @@ export default function Form(){
        randomImage:"https://i.imgflip.com/1bij.jpg"
     })
 
-    const [allMemeImages, setAllMemesImages]= React.useState(MemeData)
+    const [allMemes, setAllMemes]= React.useState(MemeData)
 
     //const [memeImage, setMemeImage] = React.useState("")
 
-    function getMemeImage(){
-      const memeArray = allMemeImages.data.memes
-      const randomNumber = Math.floor(Math.random()*memeArray.length) 
-      const url = memeArray[randomNumber].url
-      setMeme(preMeme => ({
-        ...preMeme,
-        randomImage:url
-      }))
+    // function getMemeImage(){
+    // const memeArray = allMemeImages.data.memes
+    //  const randomNumber = Math.floor(Math.random()*memeArray.length) 
+    //  const url = memeArray[randomNumber].url
+    //  setMeme(preMeme => ({
+    //    ...preMeme,
+    //    randomImage:url
+    //  }))
      
+    //} 
+    function getMemeImage() {
+        const randomNumber = Math.floor(Math.random() * allMemes.length)
+        const url = allMemes[randomNumber].url
+        setMeme(prevMeme => ({
+            ...prevMeme,
+            randomImage: url
+        }))
     }
+
+    React.useEffect(() => {
+        async function getMemes() {
+            const res = await fetch("https://api.imgflip.com/get_memes")
+            const data = await res.json()
+            setAllMemes(data.data.memes)
+        }
+        getMemes()
+    }, [])
+
+   
 
     function handleChange(event){
         const {name, value} = event.target
