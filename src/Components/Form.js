@@ -1,8 +1,68 @@
 import React from "react";
+import html2canvas from 'html2canvas';
 import "./Form.css"
 import MemeData from "../Memedata"
 
+
+
+
 export default function Form(){
+
+    const exportAsPicture = () => {
+        // const html = document.getElementsByTagName('HTML')[0];
+        // const body =  document.getElementsByTagName('BODY')[0]
+        //let htmlWidth = html.clientWidth;
+        //let bodyWidth = body.clientWidth;
+
+        const data = document.getElementById('card')
+        //const newWidth = data.scrollWidth - data.clientWidth
+
+
+        // if (newWidth > data.clientWidth){
+        //     htmlWidth += newWidth
+        //     bodyWidth += newWidth
+        // }
+
+        // html.style.width = htmlWidth + 'px'
+        // body.style.width = bodyWidth + 'px'
+        
+
+        html2canvas(data, {
+            logging: true,
+            letterRendering: 1,
+        
+            useCORS: true,
+          }).then((canvas)=>{
+            return canvas.toDataURL('image/jpg', 1.0)
+        }).then((image)=>{
+            saveAs(image, 'mymeme.jpg')
+            // html.style.width = null
+            // body.style.width = null
+        })
+        
+    }
+
+    const saveAs = (blob, fileName) =>{
+        const elem = window.document.createElement('a');
+        elem.href = blob
+        elem.download = fileName;
+        (document.body || document.documentElement).appendChild(elem);
+        if (typeof elem.click === 'function') {
+            elem.click();
+        } else {
+            elem.target = '_blank';
+            elem.dispatchEvent(new MouseEvent('click', {
+                view: window,
+                bubbles: true,
+                cancelable: true
+            }));
+        }
+        URL.revokeObjectURL(elem.href);
+        elem.remove()
+    }
+
+
+
     const [meme, setMeme] = React.useState({
        topText:"",
        bottomText:"",
@@ -74,11 +134,16 @@ export default function Form(){
              onClick={getMemeImage}
              >Get a new meme image  🖼</button>
            </div>
-           <div className="meme">
-            <img src={meme.randomImage} className="form--image"/>
-            <h2 className="meme--text top">{meme.topText}</h2>
-            <h2 className="meme--text bottom">{meme.bottomText}</h2>
-           </div>
+           <div className="container">
+                <div id="card"  className="meme card">
+                    <img crossOrigin="anonymous" src={meme.randomImage} className="form--image" alt="meme"/>
+                    <h2 className="meme--text top">{meme.topText}</h2>
+                    <h2 className="meme--text bottom">{meme.bottomText}</h2>
+                </div>
+            </div>
+           <div>
+        <button className="button--dw" onClick={exportAsPicture}>Download Meme</button>
+      </div>
         </main>
     )
 }

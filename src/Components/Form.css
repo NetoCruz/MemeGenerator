@@ -21,10 +21,17 @@ main{
     border: none;
     cursor: pointer;
     height: 50px;
+    font-size: 20px;
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .meme{
  position: relative;
+ width: 500px;
 }
 .form--image{
     max-width: 100%;
@@ -44,7 +51,7 @@ main{
     margin: 15px 0;
     padding: 0 5px;
     font-family: impact, sans-serif;
-    font-size: 2em;
+    font-size: 3em;
     text-transform: uppercase;
     color: white;
     letter-spacing: 1px;
@@ -66,4 +73,15 @@ main{
 
 .top {
     top: 0px;
+}
+
+.button--dw{
+    background-color:rgb(81, 81, 231);
+    border-radius: 5px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    height: 50px;
+    font-size: 20px;
+    margin-top: 20px;  
 }

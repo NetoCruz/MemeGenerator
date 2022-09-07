@@ -6,7 +6,7 @@ export default function Header(){
     return(
        <header>
         <img src={Logo} alt='logo'/>
-        <p>React Course</p>
+        <p>React Course Youtube/Freecodecamp</p>
        </header>   
     )
 }
